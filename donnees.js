@@ -1,39 +1,50 @@
-// Commissaires FIA : on montre un incident réel, il faut deviner la décision des commissaires.
-// bonne : numéro du bon choix dans la liste (0 = A, 1 = B, 2 = C…).
-// debut / fin : en secondes. Les clips sont coupés avant les écrans de fin.
-//
-// ⚠ À écouter avant le live : un commentateur peut annoncer la sanction dans certains clips.
+// What's the penalty : on montre un incident réel, il faut deviner la décision des commissaires.
+// choix : les 4 réponses proposées pour cet incident. bonne : numéro du bon choix (0 = 1er, 1 = 2e…).
+// debut / fin : en secondes. Les clips sont coupés avant qu'on voie la sanction.
 
 window.JEU = {
-  cle: "commissaires-fia",
-  titre: "Commissaires",
-  accent: "FIA",
-  question: "Quelle décision des commissaires ?",
+  cle: "whats-the-penalty",
+  titre: "What's the",
+  accent: "penalty",
+  question: "Quelle sanction ?",
   unite: "Incident",
   icone: "⚖",
   pauseLegere: true,     // en pause on garde l'image visible pour revoir l'action
   zoom: 1.2,
-  finTexte: "À vous de juger",
-  choix: ["Aucune pénalité", "5 secondes", "10 secondes", "Stop & Go", "Pénalité sur la grille"]
+  finTexte: "À vous de juger"
 };
 
-// Pas de niveaux ici : chaque bonne réponse vaut 1 point.
+// Chaque bonne réponse vaut 1 point.
 
 window.ELEMENTS = [
-  { youtube: "https://www.youtube.com/watch?v=Jk45D_OULQA", recap: "Silverstone 2021", reponse: "10 secondes", bonne: 2,
-    detail: "Hamilton, jugé principal responsable du contact avec Verstappen à Copse. Il gagnera quand même la course.", debut: 0, fin: null },
-  { youtube: "https://www.youtube.com/watch?v=FIZC2zPHW14", recap: "Monza 2021", reponse: "Pénalité sur la grille", bonne: 4,
-    detail: "Verstappen recule de 3 places sur la grille du GP suivant (Russie) pour l'accrochage avec Hamilton.", debut: 0, fin: null },
-  { youtube: "https://www.youtube.com/watch?v=3bX1Y_7WfVg", recap: "Djeddah 2021", reponse: "10 secondes", bonne: 2,
-    detail: "Verstappen, jugé principal responsable du contact après avoir freiné brusquement devant Hamilton.", debut: 0, fin: null },
-  { youtube: "https://www.youtube.com/watch?v=izoZa29AyWI", recap: "Montréal 2019", reponse: "5 secondes", bonne: 1,
-    detail: "Vettel, pour retour dangereux en piste devant Hamilton. Il franchit la ligne en tête mais perd la victoire.", debut: 0, fin: 25 },
-  { youtube: "https://www.youtube.com/watch?v=gRtOdvDh3ds", recap: "Interlagos 2019", reponse: "5 secondes", bonne: 1,
-    detail: "Hamilton, pour avoir provoqué l'accrochage avec Albon. Il perd le podium au profit de Sainz.", debut: 3, fin: 29 },
-  { youtube: "https://www.youtube.com/watch?v=UxkubpwHhtY", recap: "Bakou 2017", reponse: "Stop & Go", bonne: 3,
-    detail: "Vettel, 10 secondes de stop & go pour avoir percuté volontairement Hamilton sous voiture de sécurité.", debut: 0, fin: 48 },
-  { youtube: "https://www.youtube.com/watch?v=liMXN3VwoM0", recap: "Abu Dhabi 2021", reponse: "Aucune pénalité", bonne: 0,
-    detail: "Hamilton coupe le virage 6 au 1er tour. Les commissaires estiment qu'il a rendu l'avantage : pas d'enquête.", debut: 0, fin: null },
-  { youtube: "https://www.youtube.com/watch?v=215_Imoqgic", recap: "Interlagos 2021", reponse: "Aucune pénalité", bonne: 0,
-    detail: "Verstappen pousse Hamilton hors de la piste au virage 4. Les commissaires ne lancent même pas d'enquête.", debut: 0, fin: null }
+  { youtube: "https://www.youtube.com/watch?v=CQyL-6KDAxc", recap: "Singapour 2017", debut: 0, fin: null,
+    choix: ["Aucune pénalité", "Verstappen : 10 secondes", "Vettel : 5 places sur la grille", "Räikkönen : 5 secondes"], bonne: 0,
+    reponse: "Aucune pénalité", detail: "Vettel, Räikkönen et Verstappen s'accrochent au départ. Les commissaires parlent d'un incident de course : personne n'est sanctionné." },
+  { youtube: "https://www.youtube.com/watch?v=Jk45D_OULQA", recap: "Silverstone 2021", debut: 0, fin: null,
+    choix: ["Aucune pénalité", "Hamilton : 5 secondes", "Hamilton : 10 secondes", "Hamilton : Stop & Go"], bonne: 2,
+    reponse: "Hamilton : 10 secondes", detail: "Hamilton, jugé principal responsable du contact avec Verstappen à Copse. Il gagnera quand même la course." },
+  { youtube: "https://www.youtube.com/watch?v=40BfnWBxJSY", recap: "Suzuka 1989", debut: 0, fin: null,
+    choix: ["Aucune pénalité", "Prost : disqualifié", "Senna : disqualifié", "Senna : 10 secondes"], bonne: 2,
+    reponse: "Senna : disqualifié", detail: "Senna repart et gagne… mais il est disqualifié pour avoir coupé la chicane. Prost est champion du monde." },
+  { youtube: "https://www.youtube.com/watch?v=SFg58c3YM70", recap: "Spa 2012", debut: 0, fin: null,
+    choix: ["Aucune pénalité", "Grosjean : 10 places sur la grille", "Grosjean : 1 course de suspension", "Hamilton : 5 secondes"], bonne: 2,
+    reponse: "Grosjean : 1 course de suspension", detail: "Grosjean déclenche le carambolage du départ et frôle la tête d'Alonso. Il est suspendu pour le GP suivant à Monza." },
+  { youtube: "https://www.youtube.com/watch?v=FIZC2zPHW14", recap: "Monza 2021", debut: 0, fin: null,
+    choix: ["Aucune pénalité", "Verstappen : 10 secondes", "Verstappen : 3 places sur la grille", "Hamilton : 5 secondes"], bonne: 2,
+    reponse: "Verstappen : 3 places sur la grille", detail: "Verstappen recule de 3 places sur la grille du GP suivant (Russie) pour l'accrochage avec Hamilton." },
+  { youtube: "https://www.youtube.com/watch?v=nN4heMtDCRQ", recap: "Spa 2008", debut: 0, fin: null,
+    choix: ["Aucune pénalité", "Hamilton : 5 secondes", "Hamilton : 25 secondes", "Räikkönen : 10 secondes"], bonne: 2,
+    reponse: "Hamilton : 25 secondes", detail: "Hamilton coupe la chicane pour passer Räikkönen. 25 secondes ajoutées : il perd la victoire, Massa gagne." },
+  { youtube: "https://www.youtube.com/watch?v=3bX1Y_7WfVg", recap: "Djeddah 2021", debut: 0, fin: null,
+    choix: ["Aucune pénalité", "Verstappen : 5 secondes", "Verstappen : 10 secondes", "Hamilton : 10 secondes"], bonne: 2,
+    reponse: "Verstappen : 10 secondes", detail: "Verstappen, jugé principal responsable du contact après avoir freiné brusquement devant Hamilton." },
+  { youtube: "https://www.youtube.com/watch?v=IiI2HRbmXK8", recap: "Valence 2012", debut: 0, fin: 9,
+    choix: ["Aucune pénalité", "Hamilton : 20 secondes", "Maldonado : 20 secondes", "Maldonado : disqualifié"], bonne: 2,
+    reponse: "Maldonado : 20 secondes", detail: "Maldonado coupe la piste puis revient en percutant Hamilton dans le dernier tour. 20 secondes pour Maldonado." },
+  { youtube: "https://www.youtube.com/watch?v=dla65PfyD-E", recap: "Adélaïde 1994", debut: 0, fin: null,
+    choix: ["Aucune pénalité", "Schumacher : disqualifié", "Schumacher : exclu du championnat", "Hill : 10 secondes"], bonne: 0,
+    reponse: "Aucune pénalité", detail: "Schumacher touche le mur puis percute Hill. Les deux abandonnent, aucune sanction : Schumacher est champion pour 1 point." },
+  { youtube: "https://www.youtube.com/watch?v=0AhNs_W5OQU", recap: "Jerez 1997", debut: 20, fin: 65,
+    choix: ["Aucune pénalité", "Schumacher : 1 course de suspension", "Schumacher : exclu du championnat", "Villeneuve : disqualifié"], bonne: 2,
+    reponse: "Schumacher : exclu du championnat", detail: "Schumacher tente de sortir Villeneuve pour le titre. La FIA l'exclut du championnat 1997 : il perd sa 2e place." }
 ];
